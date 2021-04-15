@@ -20,6 +20,7 @@ string branchName;
 
 void processFile(string fileName)
 {
+    cout << "opening: " << fileName << endl;
     ifstream myfile(fileName);
     stringstream os;
     string line;
@@ -46,13 +47,10 @@ void processFile(string fileName)
     string temp = os.str();
     string temp_for_check = temp;
     temp = regex_replace(temp, regex("fields\n.*\\{"), newField);
-    if (temp.compare(temp_for_check) != 0)
-    {
-        ofstream write;
-        write.open(fileName, ios::out | ios::binary);
-        write << temp;
-        write.close();
-    }
+    ofstream write;
+    write.open(fileName, ios::out | ios::binary);
+    write << temp;
+    write.close();
 }
 
 bool hasEnding(std::string const &fullString, std::string const &ending)
