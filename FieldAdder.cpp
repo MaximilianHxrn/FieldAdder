@@ -123,6 +123,7 @@ int main(int argc, char const *argv[])
     fieldName = argv[4];
     fieldType = argv[5];
     branchName = argv[6];
+    string folder = argv[7];
 
     // fileType = "tableextension";
     // tableName = "Sales Header";
@@ -131,6 +132,6 @@ int main(int argc, char const *argv[])
     // fieldType = "Decimal";
     // branchName = "SC123456";
     tableName = replaceAll(tableName, ".", "\\.");
-    processFolder('"' + argv[7] + '"');
+    processFolder(folder);
     return 0;
 }
