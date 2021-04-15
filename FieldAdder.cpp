@@ -131,6 +131,6 @@ int main(int argc, char const *argv[])
     // fieldType = "Decimal";
     // branchName = "SC123456";
     tableName = replaceAll(tableName, ".", "\\.");
-    processFolder(argv[7]);
+    processFolder('"' + argv[7] + '"');
     return 0;
 }
