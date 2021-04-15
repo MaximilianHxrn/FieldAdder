@@ -1,0 +1,10 @@
+{
+    "tasks": [
+        {
+            "label": "Add Fields",
+            "type": "shell",
+            "command": "powershell.exe -File \\\\sitsrv061\\Transfer\\cir.al\\StandaloneDevTools\\FieldAdder\\FieldAdder.ps1 ${workspaceFolder} -WorkingDirectory \\\\sitsrv061\\Transfer\\cir.al\\StandaloneDevTools\\FieldAdder",
+            "problemMatcher": []
+        }
+    ]
+}
