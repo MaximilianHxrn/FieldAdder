@@ -122,7 +122,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         ('"{0}"' -f $folder)
     )
     Set-Location "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder"
-    Start-Process  "\\sitsrv061\Transfer\cir.al\StandaloneDevTools\FieldAdder\FieldAdder.exe" -NoNewWindow -ArgumentList $Arguments
+    Start-Process  "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder\FieldAdder.exe" -NoNewWindow -ArgumentList $Arguments
 }
 if ($Recursion.Checked -eq $true)
 {
