@@ -119,7 +119,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         ('"{0}"' -f $FieldName.Text.ToString())
         ('"{0}"' -f $FieldType.Text.ToString())
         ('"{0}"' -f $branch)
-        ('"{0}"' -f $folder)
+        ('"{0}"' -f $folder.toString())
     )
     Set-Location "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder"
     Start-Process  "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder\FieldAdder.exe" -NoNewWindow -ArgumentList $Arguments

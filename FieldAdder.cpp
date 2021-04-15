@@ -123,6 +123,7 @@ int main(int argc, char const *argv[])
     fieldName = argv[4];
     fieldType = argv[5];
     branchName = argv[6];
+    cout << "yes" << endl;
     string folder = argv[7];
 
     // fileType = "tableextension";
