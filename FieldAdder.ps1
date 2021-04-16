@@ -126,5 +126,5 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
 }
 if ($Recursion.Checked -eq $true)
 {
-    .\FieldAdder.ps1
+    .\FieldAdder.ps1 $folder
 }
