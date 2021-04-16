@@ -43,7 +43,7 @@ void processFile(string fileName)
             break;
         }
     }
-    if (!fileFound | !myfile.is_open())
+    if (!fileFound)
     {
         return;
     }
