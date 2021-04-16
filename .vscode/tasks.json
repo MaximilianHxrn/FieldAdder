@@ -25,7 +25,7 @@
         {
             "label": "Add Fields",
             "type": "shell",
-            "command": "powershell.exe -File C:\\Users\\Shabib\\Desktop\\Repository\\FieldAdder\\FieldAdder.ps1 -WorkingDirectory C:\\Users\\Shabib\\Desktop\\Repository\\TxtFormatter",
+            "command": "powershell.exe -File C:\\Users\\Shabib\\Desktop\\Repository\\FieldAdder\\FieldAdder.ps1 ${workspaceFolder} -WorkingDirectory C:\\Users\\Shabib\\Desktop\\Repository\\FieldAdder",
             "problemMatcher": []
         }
     ],

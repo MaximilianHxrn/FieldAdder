@@ -17,23 +17,36 @@ string fieldID;
 string fieldName;
 string fieldType;
 string branchName;
+bool fileFound = false;
 
 void processFile(string fileName)
 {
-    cout << "opening: " << fileName << endl;
     ifstream myfile(fileName);
     stringstream os;
     string line;
-    regex r(fileType + " .*extends \"" + tableName + "\"");
-    getline(myfile, line);
-    if (line.compare("")) {
-        getline(myfile, line);
+    regex r("");
+    if (fileType == "table")
+    {
+        r.assign(fileType + ".*\"" + tableName + "\"");
     }
-    if (!regex_match(line, r) | !myfile.is_open())
+    else if (fileType == "tableextension")
+    {
+        r.assign(fileType + " .*extends \"" + tableName + "\"");
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        getline(myfile, line);
+        os << line << endl;
+        if (regex_match(line, r))
+        {
+            fileFound = true;
+            break;
+        }
+    }
+    if (!fileFound | !myfile.is_open())
     {
         return;
     }
-    os << line << endl;
     while (getline(myfile, line))
     {
         os << line << endl;
@@ -43,17 +56,18 @@ void processFile(string fileName)
     {
         fieldName = fieldName.substr(4, fieldName.length());
     }
-    newField += "\n\t\t\tCaption = '" + fieldName + "';";
-    newField += "\n\t\t\tDataClassification = CustomerContent;";
-    newField += "\n\t\t\tDescription = '" + branchName + "';";
-    newField += "\n\t\t}";
+    newField += "\n\t\t\tCaption = '" + fieldName + "';\n\t\t\tDataClassification = CustomerContent;";
+    newField += "\n\t\t\tDescription = '" + branchName + "';\n\t\t}";
     string temp = os.str();
     string temp_for_check = temp;
     temp = regex_replace(temp, regex("fields\n.*\\{"), newField);
-    ofstream write;
-    write.open(fileName, ios::out | ios::binary);
-    write << temp;
-    write.close();
+    if (temp_for_check.compare(temp) != 0)
+    {
+        ofstream write;
+        write.open(fileName, ios::out | ios::binary);
+        write << temp;
+        write.close();
+    }
 }
 
 bool hasEnding(std::string const &fullString, std::string const &ending)
@@ -62,17 +76,13 @@ bool hasEnding(std::string const &fullString, std::string const &ending)
     {
         return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void processFolder(string folder)
 {
     // Copied from:
     // https://stackoverflow.com/questions/67273/how-do-you-iterate-through-every-file-directory-recursively-in-standard-c
-    cout << "searching: " << folder << endl;
     string process_path = folder + "\\";
     string search_path = folder + "\\*";
     WIN32_FIND_DATAA fd;
@@ -81,6 +91,10 @@ void processFolder(string folder)
     {
         do
         {
+            if (fileFound)
+            {
+                return;
+            }
             if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
             {
                 if (hasEnding(fd.cFileName, ".al"))
@@ -124,14 +138,11 @@ int main(int argc, char const *argv[])
     fieldName = argv[4];
     fieldType = argv[5];
     branchName = argv[6];
-
-    // fileType = "tableextension";
-    // tableName = "Sales Header";
-    // fieldID = "55145";
-    // fieldName = "SIT Test Field";
-    // fieldType = "Decimal";
-    // branchName = "SC123456";
     tableName = replaceAll(tableName, ".", "\\.");
     processFolder(argv[7]);
+    if (!fileFound)
+    {
+        cout << "the file wasn´t found." << endl;
+    }
     return 0;
 }
