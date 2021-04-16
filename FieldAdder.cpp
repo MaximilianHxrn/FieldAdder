@@ -26,6 +26,9 @@ void processFile(string fileName)
     string line;
     regex r(fileType + " .*extends \"" + tableName + "\"");
     getline(myfile, line);
+    if (line.compare("")) {
+        getline(myfile, line);
+    }
     if (!regex_match(line, r) | !myfile.is_open())
     {
         return;
