@@ -24,6 +24,7 @@ $DropDown.Size = new-object System.Drawing.Size(250, 20)
 ForEach ($Item in $DropDownArray) {
     [void] $DropDown.Items.Add($Item)
 }
+$DropDown.Text = $args[1]
 
 # --------------------------------------------------------------
 
@@ -35,6 +36,7 @@ $labeltableName.Size = New-Object System.Drawing.Size(100, 25)
 $tableName = New-Object System.Windows.Forms.TextBox
 $tableName.Location = New-Object System.Drawing.Size(125, 50)
 $tableName.Size = New-Object System.Drawing.Size(250, 20)
+$tableName.Text = $args[2]
 
 # --------------------------------------------------------------
 
@@ -126,5 +128,5 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
 }
 if ($Recursion.Checked -eq $true)
 {
-    .\FieldAdder.ps1 $folder
+    .\FieldAdder.ps1 $folder $DropDown.Text.ToString() $TableName.Text.ToString()
 }
