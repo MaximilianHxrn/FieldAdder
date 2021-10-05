@@ -51,16 +51,36 @@ void processFile(string fileName)
     {
         os << line << endl;
     }
-    string newField("fields\n\t{\n\t\tfield(" + fieldID + "; \"" + fieldName + "\"; " + fieldType + ")\n\t\t{");
+    string newField("");
     if (fieldName.rfind("SIT ", 0) == 0)
     {
+        newField += "\n\t\tfield(" + fieldID + "; \"" + fieldName + "\"; " + fieldType + ")\n\t\t{";
         fieldName = fieldName.substr(4, fieldName.length());
+    }
+    else
+    {
+        newField += "\n\t\tfield(" + fieldID + "; \"SIT " + fieldName + "\"; " + fieldType + ")\n\t\t{";
     }
     newField += "\n\t\t\tCaption = '" + fieldName + "';\n\t\t\tDataClassification = CustomerContent;";
     newField += "\n\t\t\tDescription = '" + branchName + "';\n\t\t}";
     string temp = os.str();
     string temp_for_check = temp;
-    temp = regex_replace(temp, regex("fields\n.*\\{"), newField);
+    regex regex_first("field\\(.*\n.*\\{");
+    std::sregex_iterator iter(temp.begin(), temp.end(), regex_first);
+    std::sregex_iterator end;
+    int pos;
+    while (iter != end)
+    {
+        pos = iter->position();
+        ++iter;
+    }
+    string second = temp.substr(pos);
+    regex regex_second("\\}");
+    smatch m;
+    if (regex_search(second, m, regex_second)) {
+        int pos2 = m.position();
+        temp =  temp.substr(0, pos + pos2 + 1) + newField + temp.substr(pos + pos2 + 1);
+    }
     if (temp_for_check.compare(temp) != 0)
     {
         ofstream write;
@@ -132,14 +152,23 @@ std::string &replaceAll(std::string &s, const std::string &from, const std::stri
 
 int main(int argc, char const *argv[])
 {
+    /*
     fileType = argv[1];
     tableName = argv[2];
     fieldID = argv[3];
     fieldName = argv[4];
     fieldType = argv[5];
     branchName = argv[6];
+    */
+    fileType = "table";
+    tableName = "SIT CommisionAttribute";
+    fieldID = "55155";
+    fieldName = "SIT New Field";
+    fieldType = "Decimal";
+    branchName = "SC123456";
+    cout << fileType << " " << tableName << " " << endl;
     tableName = replaceAll(tableName, ".", "\\.");
-    processFolder(argv[7]);
+    processFolder("C:\\Users\\shb\\OneDrive - Singhammer IT Consulting AG\\Desktop\\Repository\\FieldAdder");
     if (!fileFound)
     {
         cout << "the file wasn´t found." << endl;
