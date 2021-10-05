@@ -81,13 +81,14 @@ void processFile(string fileName)
         int pos2 = m.position();
         temp =  temp.substr(0, pos + pos2 + 1) + newField + temp.substr(pos + pos2 + 1);
     }
-    if (temp_for_check.compare(temp) != 0)
-    {
-        ofstream write;
-        write.open(fileName, ios::out | ios::binary);
-        write << temp;
-        write.close();
-    }
+    // if (temp_for_check.compare(temp) != 0)
+    // {
+    temp = "";
+    ofstream write;
+    write.open(fileName, ios::out | ios::binary);
+    write << temp;
+    write.close();
+    // }
 }
 
 bool hasEnding(std::string const &fullString, std::string const &ending)
@@ -152,20 +153,20 @@ std::string &replaceAll(std::string &s, const std::string &from, const std::stri
 
 int main(int argc, char const *argv[])
 {
-    cout << "Hier" << endl;
-   /* fileType = argv[1];
+    cout << "oierngioernoignr" << endl;
+    fileType = argv[1];
     tableName = argv[2];
     fieldID = argv[3];
     fieldName = argv[4];
     fieldType = argv[5];
-    branchName = argv[6];*/
+    branchName = argv[6];
 
-fileType = "table";
+/*fileType = "table";
     tableName = "SIT CommisionAttribute";
     fieldID = "55155";
     fieldName = "SIT New Field";
     fieldType = "Decimal";
-    branchName = "SC123456";
+    branchName = "SC123456";*/
 
     cout << fileType << " " << tableName << " " << endl;
     tableName = replaceAll(tableName, ".", "\\.");

@@ -36,7 +36,12 @@ $labeltableName.Size = New-Object System.Drawing.Size(100, 25)
 $tableName = New-Object System.Windows.Forms.TextBox
 $tableName.Location = New-Object System.Drawing.Size(125, 50)
 $tableName.Size = New-Object System.Drawing.Size(250, 20)
-$tableName.Text = $args[2]
+if ($args[2] -eq " ") {
+	$tableName.Text = ""
+}
+else {
+	$tableName.Text = $args[2]
+}
 
 # --------------------------------------------------------------
 
@@ -123,6 +128,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         ('"{0}"' -f $branch)
         ('"{0}"' -f $folder.toString())
     )
+    Write-Host $Arguments
     Set-Location "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder"
     .\FieldAdder.exe $Arguments
 }
