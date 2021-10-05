@@ -152,23 +152,24 @@ std::string &replaceAll(std::string &s, const std::string &from, const std::stri
 
 int main(int argc, char const *argv[])
 {
-    /*
+    
     fileType = argv[1];
     tableName = argv[2];
     fieldID = argv[3];
     fieldName = argv[4];
     fieldType = argv[5];
     branchName = argv[6];
-    */
+    /*
     fileType = "table";
     tableName = "SIT CommisionAttribute";
     fieldID = "55155";
     fieldName = "SIT New Field";
     fieldType = "Decimal";
     branchName = "SC123456";
+    */
     cout << fileType << " " << tableName << " " << endl;
     tableName = replaceAll(tableName, ".", "\\.");
-    processFolder("C:\\Users\\shb\\OneDrive - Singhammer IT Consulting AG\\Desktop\\Repository\\FieldAdder");
+    processFolder(argv[7]);
     if (!fileFound)
     {
         cout << "the file wasn´t found." << endl;
