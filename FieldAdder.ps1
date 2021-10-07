@@ -113,6 +113,9 @@ $form.Controls.Add($labelRecursion)
 $form.Controls.Add($Recursion)
 $form.Controls.Add($RunButton)
 $form.Topmost = $true
+$form.FormBorderStyle = 'FixedDialog';
+$form.MaximizeBox = $false;
+$form.MinimizeBox = $false;
 $result = $form.ShowDialog()
 
 # --------------------------------------------------------------
