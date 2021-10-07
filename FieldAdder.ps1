@@ -128,7 +128,6 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         ('"{0}"' -f $branch)
         ('"{0}"' -f $folder.toString())
     )
-    Write-Host $Arguments
     Set-Location "\\sitsrv061\WinFrame\Transfer\cir.al\StandaloneDevTools\FieldAdder"
     .\FieldAdder.exe $Arguments
 }
