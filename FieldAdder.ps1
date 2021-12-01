@@ -116,6 +116,16 @@ $form.Topmost = $true
 $form.FormBorderStyle = 'FixedDialog';
 $form.MaximizeBox = $false;
 $form.MinimizeBox = $false;
+$form.KeyPreview = $true #This is the important part
+$form.Add_KeyDown{
+    param ( 
+        [Parameter(Mandatory)][Object]$sender,
+        [Parameter(Mandatory)][System.Windows.Forms.KeyEventArgs]$e
+    )
+    if($e.KeyCode -eq "Escape"){
+        $Form.close()
+    }
+}
 $result = $form.ShowDialog()
 
 # --------------------------------------------------------------
