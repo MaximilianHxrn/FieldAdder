@@ -8,6 +8,16 @@ $form = New-Object System.Windows.Forms.Form
 $form.Text = 'FieldAdder'
 $form.Size = New-Object System.Drawing.Size(425, 240)
 $form.StartPosition = 'CenterScreen'
+$form.KeyPreview = $true #This is the important part
+$form.Add_KeyDown{
+    param ( 
+        [Parameter(Mandatory)][Object]$sender,
+        [Parameter(Mandatory)][System.Windows.Forms.KeyEventArgs]$e
+    )
+    if($e.KeyCode -eq "Escape"){
+        $form.close()
+    }
+}
 
 # --------------------------------------------------------------
 
@@ -99,8 +109,8 @@ $RunButton.DialogResult = [System.Windows.Forms.DialogResult]::Yes
 
 # --------------------------------------------------------------
 
-$Form.Controls.Add($labelType)
-$Form.Controls.Add($DropDown)
+$form.Controls.Add($labelType)
+$form.Controls.Add($DropDown)
 $form.Controls.Add($labeltableName)
 $form.Controls.Add($tableName)
 $form.Controls.Add($labelFieldID)
